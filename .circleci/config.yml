@@ -26,6 +26,4 @@ workflows:
       - build-and-test
   aws-cli:
     jobs:
-      - deploy-lambda:
-          context: aws
-
+      - deploy-lambda
