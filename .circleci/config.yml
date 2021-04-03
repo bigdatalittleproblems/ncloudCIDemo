@@ -2,6 +2,7 @@ version: 2.1
 
 orbs:
   python: circleci/python@0.2.1
+  aws-cli: circleci/aws-cli@2.0
 
 jobs:
   build-and-test:
@@ -11,11 +12,20 @@ jobs:
       - python/load-cache
       - python/install-deps
       - python/save-cache
-      - run:
-          command: ./lambda_function.py test
-          name: Test
+  deploy-lambda:
+    executor: aws-cli/default
+    steps:
+      - checkout
+      - aws-cli/setup:
+          profile-name: example
+      - run: aws s3 ls
 
 workflows:
   main:
     jobs:
       - build-and-test
+  aws-cli:
+    jobs:
+      - deploy-lambda:
+          context: aws
+
