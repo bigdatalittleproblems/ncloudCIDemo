@@ -14,10 +14,24 @@ functions:
   hello:
     handler: lambda_function.lambda_handler # required, handler set in AWS Lambda
     name: ${opt:stage, self:provider.stage, 'dev'}-cramirez-cicd-func # optional, Deployed Lambda name
-    description: Description of what the lambda function does # optional, Description to publish to AWS
+    description: This is a simple function that greets users # optional, Description to publish to AWS
     runtime: python3.8 # optional overwrite, default is provider runtime
     memorySize: 512 # optional, in MB, default is 1024
     timeout: 10 # optional, in seconds, default is 6
     provisionedConcurrency: 3 # optional, Count of provisioned lambda instances
     reservedConcurrency: 5 # optional, reserved concurrency limit for this function. By default, AWS uses account concurrency limit
     tracing: PassThrough # optional, overwrite, can be 'Active' or 'PassThrough'
+    events:
+      - http:
+          path: hello
+          method: get
+          cors:
+            origin: '*'
+            headers:
+              - Content-Type
+              - X-Amz-Date
+              - Authorization
+              - X-Api-Key
+              - X-Amz-Security-Token
+              - X-Amz-User-Agent
+            allowCredentials: false
