@@ -1,7 +1,6 @@
 import json
 # import boto3
-import os
-destBucket = os.environ['Dest_Bucket']
+# import os
 def lambda_handler(event, context):
     message = 'Hello World V1'
     print(message)
