@@ -7,9 +7,9 @@ def lambda_handler(event, context):
     message = "Hello World V1"
     print(message)
     return {
-        "statusCode": 200,
+        "statusCode": "200",
         "body": {
-            "message": message,
+            "message": json.dumps({'message': message}),
         },
         "headers": {
             "Access-Control-Allow-Origin": '*'},
