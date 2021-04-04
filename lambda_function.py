@@ -6,12 +6,12 @@ import json
 def lambda_handler(event, context):
     message = "Hello World V1"
     print(message)
-    return json.dumps({
+    return {
         "statusCode": 200,
         "body": {
             "message": message,
         },
         "headers": {
-            'Access-Control-Allow-Origin': '*'},
+        "Access-Control-Allow-Origin": '*'},
         "isBase64Encoded": "false"
-    })
+    }
