@@ -36,9 +36,5 @@ workflows:
   main:
     jobs:
       - build-and-test
-  aws-cli:
-    jobs:
       - aws-check
-  deploy:
-    jobs:
       - deploy
