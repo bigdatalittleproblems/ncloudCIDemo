@@ -29,8 +29,7 @@ jobs:
           app-name: cr-serverless-framework-orb
           org-name: circleci
       - run:
-          command: serverless deploy -v
-          name: deploy
+          serverless deploy --stage production --region us-east-1
 
 workflows:
   main:
