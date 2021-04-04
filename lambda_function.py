@@ -10,5 +10,5 @@ def lambda_handler(event, context):
             "message": message,
         },
         "headers":{ 'Access-Control-Allow-Origin' : '*' },  
-        "isBase64Encoded": false
+        "isBase64Encoded": "false"
     })
