@@ -4,6 +4,6 @@ import json
 
 
 def lambda_handler(event, context):
-    message = "Hello World V1"
+    message = "Hello World! From Christian Ramirez App V2"
     print(message)
     return {"statusCode": 200, "body": message}
