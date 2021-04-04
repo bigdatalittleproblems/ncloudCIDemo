@@ -4,4 +4,5 @@ import json
 def lambda_handler(event, context):
     message = 'Hello World V1'
     print(message)
-    return {"statusCode": 200,"response":message}
+    resp={"statusCode": 200,"response":message}
+    return json.dumps(resp)
