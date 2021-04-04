@@ -4,5 +4,10 @@ import json
 def lambda_handler(event, context):
     message = 'Hello World V1'
     print(message)
-    resp={"statusCode": 200,"body":message}
-    return json.dumps(resp)
+    return json.dumps({
+        "statusCode": 200,
+        "body": {
+            "message": message,
+        },
+        "headers":{ 'Access-Control-Allow-Origin' : '*' }
+    })
