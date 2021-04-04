@@ -1,0 +1,23 @@
+# serverless.yml
+service: myService
+
+provider:
+  name: aws
+  runtime: python3.8
+  memorySize: 512 # optional, in MB, default is 1024
+  timeout: 10 # optional, in seconds, default is 6
+  versionFunctions: true # optional, default is true
+  tracing:
+    lambda: true # optional, enables tracing for all functions (can be true (true equals 'Active') 'Active' or 'PassThrough')
+
+functions:
+  hello:
+    handler: lambda_function.lambda_handler # required, handler set in AWS Lambda
+    name: ${opt:stage, self:provider.stage, 'dev'}-lambdaName # optional, Deployed Lambda name
+    description: Description of what the lambda function does # optional, Description to publish to AWS
+    runtime: python3.8 # optional overwrite, default is provider runtime
+    memorySize: 512 # optional, in MB, default is 1024
+    timeout: 10 # optional, in seconds, default is 6
+    provisionedConcurrency: 3 # optional, Count of provisioned lambda instances
+    reservedConcurrency: 5 # optional, reserved concurrency limit for this function. By default, AWS uses account concurrency limit
+    tracing: PassThrough # optional, overwrite, can be 'Active' or 'PassThrough'
