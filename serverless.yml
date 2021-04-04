@@ -23,5 +23,5 @@ functions:
     tracing: PassThrough # optional, overwrite, can be 'Active' or 'PassThrough'
     events:
       - http:
-          path: hello
+          path: /
           method: get
