@@ -3,6 +3,7 @@ version: 2.1
 orbs:
   python: circleci/python@0.2.1
   aws-cli: circleci/aws-cli@2.0
+  serverless-framework: circleci/serverless-framework@1.0.1
 
 jobs:
   build-and-test:
@@ -12,13 +13,24 @@ jobs:
       - python/load-cache
       - python/install-deps
       - python/save-cache
-  deploy-lambda:
+  aws-check:
     executor: aws-cli/default
     steps:
       - checkout
       - aws-cli/setup:
           profile-name: example
       - run: aws s3 ls
+  deploy:
+    executor: serverless/default
+    steps:
+      - checkout
+      - aws-cli/setup
+      - serverless/setup:
+          app-name: cr-serverless-framework-orb
+          org-name: circleci
+      - run:
+          command: serverless deploy -v
+          name: deploy
 
 workflows:
   main:
@@ -26,4 +38,4 @@ workflows:
       - build-and-test
   aws-cli:
     jobs:
-      - deploy-lambda
+      - aws-check
